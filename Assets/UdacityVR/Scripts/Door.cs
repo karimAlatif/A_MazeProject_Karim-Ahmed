@@ -63,12 +63,14 @@ public class Door : MonoBehaviour {
 
 		if (Camera.main.transform.parent.transform.gameObject.GetComponent<PlayerManager> ().KeyCollected) {
 
+			this.gameObject.GetComponent<AudioSource> ().clip = OpenedDoor;
+			this.gameObject.GetComponent<AudioSource> ().Play ();
 			UnlockNow = true;
 
 
 		} else {
 
-			this.gameObject.GetComponent<AudioSource> ().clip = OpenedDoor;
+			this.gameObject.GetComponent<AudioSource> ().clip = ClosedDoor;
 			this.gameObject.GetComponent<AudioSource> ().Play ();
 
 		}
@@ -78,8 +80,6 @@ public class Door : MonoBehaviour {
 
 	public IEnumerator Unlock () {
 
-		this.gameObject.GetComponent<AudioSource> ().clip = ClosedDoor;
-		this.gameObject.GetComponent<AudioSource> ().Play ();
 
 			while (Timer < 1) {
 				LeftDoor.transform.rotation = Quaternion.Slerp (S_LeftDoor, LeftDoorOpenedVector, Timer );
